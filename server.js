@@ -136,7 +136,7 @@ app.post("/articles/:id", function(req, res) {
     // Otherwise
     else {
       // Use the article id to find and update it's note
-      Article.findOneAndUpdate({ "_id": req.params.id }, { "note": doc._id })
+      Article.findOneAndUpdate({ "_id": req.params.id }, { $push: { "note": doc._id }}, {new : true })
       // Execute the above query
       .exec(function(err, doc) {
         // Log any errors
@@ -151,6 +151,18 @@ app.post("/articles/:id", function(req, res) {
     }
   });
 });
+
+
+app.get("/notes/:id", function(req, res){
+  Note.remove({"_id": req.params.id}, function(err, doc){
+    if (err){
+      console.log(err);
+    }
+    else {
+      res.redirect("/");
+    }
+  })
+})
 
 
 // Listen on port 3000
