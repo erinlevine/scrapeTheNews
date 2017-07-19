@@ -1,38 +1,37 @@
-// Grab the articles as a json
+
 $.getJSON("/articles", function(data) {
-  // For each one
+  // Looping through each article
   for (var i = 0; i < data.length; i++) {
-    // Display the apropos information on the page
+    // Displaying by appending the information to the page
     $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
   }
 });
 
-
-// Whenever someone clicks a p tag
+//On click event whenever a user clicks the "p" tag (an article):
 $(document).on("click", "p", function() {
-  // Empty the notes from the note section
+  // Emptying the notes:
   $("#notes").empty();
-  // Save the id from the p tag
+  // Saving the ID.
   var thisId = $(this).attr("data-id");
 
-  // Now make an ajax call for the Article
+  // Creating an AJAX call
   $.ajax({
     method: "GET",
     url: "/articles/" + thisId
   })
-    // With that done, add the note information to the page
+    // Appending the note information to the page
     .done(function(data) {
       console.log(data);
-      // The title of the article
+      // The title:
       $("#notes").append("<h2>");
-      // An input to enter a new title
+      // Entering a new title:
       $("#notes").append("<input id='titleinput' name='title' >");
-      // A textarea to add a new note body
+      // Text body:
       $("#notes").append("<textarea id='bodyinput' name='body'></textarea>");
-      // A button to submit a new note, with the id of the article saved to it
+      // Button to submit a new note with also the ID attached. 
       $("#notes").append("<button data-id='" + data._id + "' id='savenote'>Save Note</button>");
 
-      // If there's a note in the article
+      // If there's a note in the article. Also included a button so that the user can delete the note from the page:
       if (data.note) {
         var notes = data.note; 
         notes.forEach(function(notes){
@@ -47,25 +46,25 @@ $(document).on("click", "p", function() {
 
 // When you click the savenote button
 $(document).on("click", "#savenote", function() {
-  // Grab the id associated with the article from the submit button
+  // Grabbing the ID:
   var thisId = $(this).attr("data-id");
 
-  // Run a POST request to change the note, using what's entered in the inputs
+  // Changing the note using a POST request
   $.ajax({
     method: "POST",
     url: "/articles/" + thisId,
     data: {
-      // Value taken from title input
+      // value of the title
       title: $("#titleinput").val(),
-      // Value taken from note textarea
+      // Value of the text area of the actual note
       body: $("#bodyinput").val()
     }
   })
-    // With that done
+    
     .done(function(data) {
-      // Log the response
+      
       console.log(data);
-      // Empty the notes section
+      // Clearing the notes section
       $("#notes").empty();
     });
 

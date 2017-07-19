@@ -9,23 +9,25 @@ var ArticleSchema = new Schema({
   title: {
     type: String,
     required: true,
+    //Adding unique so that only one of each title will show up
     unique: true
   },
   // link is a required string
   link: {
     type: String,
     required: true,
+    //Making the link unique so that only one of each link will show up.
     unique: true
   },
-  // This only saves one note's ObjectId, ref refers to the Note model
+  
   note: [{
     type: Schema.Types.ObjectId,
     ref: "Note"
   }]
 });
 
-// Create the Article model with the ArticleSchema
+
 var Article = mongoose.model("Article", ArticleSchema);
 
-// Export the model
+// Export
 module.exports = Article;
