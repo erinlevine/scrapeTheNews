@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script type="text/javascript" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <meta charset="UTF-8">
     <title>Scraping With Mongoose</title>
     <style>
@@ -39,11 +43,16 @@
   <body>
     <div id="wrapper">
       <h1>Note Scraper</h1>
+      <form method="get" action="/scrape">
+        <button type="submit" class="btn btn-primary">Scrape Reddit!</button>
+      </form>
       <h2><i>If you can do this...the homework should be no problem.</i></h2>
+
       <div id="articles"></div>
       <div id="notes"></div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     <script src="app.js"></script>
   </body>
 </html>

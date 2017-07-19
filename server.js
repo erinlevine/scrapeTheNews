@@ -49,6 +49,7 @@ db.once("open", function() {
 
 // A GET request to scrape the echojs website
 app.get("/scrape", function(req, res) {
+  console.log("Made it here");
   // First, we grab the body of the html with request
   request("https://www.reddit.com/r/bigbrother/", function(error, response, html) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
@@ -82,7 +83,7 @@ app.get("/scrape", function(req, res) {
       });
   });
   // Tell the browser that we finished scraping the text
-  res.send("Scrape Complete");
+  res.redirect("/");
 });
 });
 
