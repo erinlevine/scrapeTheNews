@@ -1,7 +1,9 @@
 // Dependencies
 var express = require("express");
 var bodyParser = require("body-parser");
+
 var PORT = process.env.PORT || 3000;
+
 var logger = require("morgan");
 var mongoose = require("mongoose");
 var Note = require("./models/Note.js");
@@ -26,7 +28,7 @@ app.use(express.static("public"));
 
 // Database configuration with mongoose
 var databaseURL = "mongodb://localhost/scraper";
-  
+
 if (process.env.MONGODB_URI) {
   mongoose.connect(process.env.MONGODB_URI);
 }
@@ -34,6 +36,7 @@ else {
   mongoose.connect(databaseURL);
 }
 var db = mongoose.connection;
+
 
 
 // Show any mongoose errors
