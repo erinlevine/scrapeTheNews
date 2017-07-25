@@ -26,7 +26,14 @@ app.use(express.static("public"));
 
 // Database configuration with mongoose
 mongoose.connect("mongodb://localhost/scraper");
+  if (process.env.MONGODB_URI) {
+    mongoose.connect(process.env.MONGODB_URI);
+  }
+  else {
+    mongoose.connect(databaseURL);
+  }
 var db = mongoose.connection;
+
 
 // Show any mongoose errors
 db.on("error", function(error) {
