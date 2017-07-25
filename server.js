@@ -27,20 +27,16 @@ app.use(bodyParser.urlencoded({
 app.use(express.static("public"));
 
 // Database configuration with mongoose
-var databaseURL = "mongodb://localhost/scraper";
+// var databaseURL = "mongodb://localhost/scraper";
 
-// mongoose.connect("mongodb://heroku_ls66r1mt:vv80gfa6vcd6eqdbvnu37m6vgt@ds025389.mlab.com:25389/heroku_ls66r1mt");
+mongoose.connect("mongodb://heroku_ls66r1mt:vv80gfa6vcd6eqdbvnu37m6vgt@ds025389.mlab.com:25389/heroku_ls66r1mt");
 var db = mongoose.connection;
 
 console.log("Hi");
 
-if (process.env.MONGODB_URI) {
-  mongoose.connect("mongodb://heroku_ls66r1mt:vv80gfa6vcd6eqdbvnu37m6vgt@ds025389.mlab.com:25389/heroku_ls66r1mt");
-}
-else {
-  mongoose.connect(databaseURL);
-}
-var db = mongoose.connection;
+// mongoose.connect(databaseURL);
+
+
 
 
 
